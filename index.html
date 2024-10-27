@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Marketing Profit Article</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .calc-value {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    font-weight: bold;
+  }
+  .calc-value:hover .selector {
+    display: inline;
+  }
+  .selector {
+    display: none;
+    position: absolute;
+    left: 0;
+    z-index: 10;
+  }
+  .selector select {
+    width: auto;
+  }
+</style>
+</head>
+<body>
+
+<article>
+  <p>Let's say we need to make $<span class="calc-value" id="targetSales">15</span> million in sales.</p>
+  <p>Let's say we need to make $<span id="copySales">15</span> million in sales.</p>
+</article>
+
+<script>
+  // Possible values for the dropdown selector
+  const values = ["Select...",1, 2, 5, 10, 15, 20, 25, 50, 100];
+
+  // Function to create a dropdown menu with specific values
+  function createDropdown(id) {
+    const select = document.createElement('select');
+    select.className = 'dropdown';
+
+    values.forEach(value => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.text = value;
+      select.appendChild(option);
+    });
+
+    select.addEventListener('change', () => {
+        console.log(`Selected value: ${select.value}`); 
+      document.getElementById(id).innerText = select.value;
+
+      document.getElementById("copySales").innerText = select.value;
+      
+      select.remove();
+    });
+
+    return select;
+  }
+
+  // Attach hover functionality to reveal dropdown selector
+  document.querySelectorAll('.calc-value').forEach(item => {
+    item.addEventListener('mouseover', () => {
+      if (!item.querySelector('.dropdown')) {
+        const dropdown = createDropdown(item.id);
+        const selectorDiv = document.createElement('span');
+        selectorDiv.className = 'selector';
+        selectorDiv.appendChild(dropdown);
+        item.appendChild(selectorDiv);
+      }
+      item.querySelector('.dropdown').focus();
+    });
+  });
+</script>
+
+</body>
+</html>
