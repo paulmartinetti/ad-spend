@@ -1,83 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactive Marketing Profit Article</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-  }
-  .calc-value {
-    display: inline-block;
-    cursor: pointer;
-    position: relative;
-    font-weight: bold;
-  }
-  .calc-value:hover .selector {
-    display: inline;
-  }
-  .selector {
-    display: none;
-    position: absolute;
-    left: 0;
-    z-index: 10;
-  }
-  .selector select {
-    width: auto;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Marketing Profit Article</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .calc-value {
+      display: inline-block;
+      cursor: pointer;
+      position: relative;
+      font-weight: bold;
+    }
+
+    .calc-value:hover .selector {
+      display: inline;
+    }
+
+    .selector {
+      display: none;
+      position: absolute;
+      left: 0;
+      z-index: 10;
+    }
+
+    .selector select {
+      width: auto;
+    }
+  </style>
 </head>
+
 <body>
 
-<article>
-  <p>Let's say we need to make $<span class="calc-value" id="targetSales">15</span> million in sales.</p>
-  <p>Let's say we need to make $<span id="copySales">15</span> million in sales.</p>
-</article>
+  <article>
+    <p>Let's say we need to make $<span class="calc-value" id="targetSales">15</span> million in sales.</p>
+    <p>Let's say we need to make $<span id="copySales">15</span> million in sales.</p>
+  </article>
 
-<script>
-  // Possible values for the dropdown selector
-  const values = ["Select...",1, 2, 5, 10, 15, 20, 25, 50, 100];
+  <p>
+    Why Marketing Is A Profit Center
+This is what happens when a sales guy writes an article about marketing. And why wouldn't I? Marketing is
+good to me, it's working while I'm selling and also when I'm not. We make a good team.
+Half of our leads this year will probably come from our marketing efforts, the rest will arrive from a mix of
+business development efforts and some partner and referral leads.
+It all starts with a solid Go-To-Market strategy, researched and documented by experts in our market. This
+foundation establishes the messaging delivered by everyone and everything in our organization from that point
+forward.
+But maybe you're not coming from it at that angle. Maybe you're churning on the number of contracts you need
+signed this fiscal year:
+Let's say we need to make $10,000,000 in sales. (<--feel free to change this total)
+And our typical sale is $200,000.
+That means we need to get 50 contracts signed.
+As we've said, 50% of those contracts will likely come from our marketing efforts. This is where Ad Spend
+budgeting comes in, that difficult to pin-down sort of number that has too many zeros. Is there any rhyme or
+reason behind this number? Yes! Let's walk through it.
+Half or 25 contracts will come from qualified leads responding to our marketing efforts. This is called an
+inbound lead. It refers to a new business connection to your company who needs your products and services.
+About 10% of our qualified leads will sign a contract, meaning that we'll need 250 qualified leads to gain $5MM
+in revenue.
+Qualified leads are a subset, let's start with 30% of all leads, meaning that our goal is to gain 250/0.3 or about
+830 leads.
+In the digital space (LinkedIn, Google Ads, our Website, etc), a lead happens when an interested person clicks
+on an ad or downloads an article, or writes or calls the company in response to something they see or hear.
+Properly placed ads and articles that make the new connection easy are referred to as implementing a
+Call-To-Action (CTA).
+To react to something that represents your company, products, or services, this person has to see it or hear
+about it. These are called views or impressions of our ad, post, article, podcast, etc. The rate at which people
+who view an ad and click on it to learn more is typically around 1.5%.
+We're now at 830/0.015 which is about 55,300 views or impressions that we need to gain these leads. This is
+referred to as traffic.
+If this was all ads at a cost per click of $5, our budget would be 830 x 5 or $4,150. (This seems like a low
+number to generate $5MM in business)
+    Metrics
+The right way to manage this process is exactly to do that: manage it! To manage Ad spend as well as all of
+the other components in our marketing plan is best accomplished by collecting and analyzing the data behind
+our marketing activities.
+Here are a few metrics that weigh into our ad spend decision-making.
+Cost per Lead -
+Cost per Sale -
+  </p>
 
-  // Function to create a dropdown menu with specific values
-  function createDropdown(id) {
-    const select = document.createElement('select');
-    select.className = 'dropdown';
+  <script>
+    // Possible values for the dropdown selector
+    const values = ["Select...", 1, 2, 5, 10, 15, 20, 25, 50, 100];
 
-    values.forEach(value => {
-      const option = document.createElement('option');
-      option.value = value;
-      option.text = value;
-      select.appendChild(option);
+    // Function to create a dropdown menu with specific values
+    function createDropdown(id) {
+      const select = document.createElement('select');
+      select.className = 'dropdown';
+
+      values.forEach(value => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.text = value;
+        select.appendChild(option);
+      });
+
+      select.addEventListener('change', () => {
+        // console.log(`Selected value: ${select.value}`); 
+        document.getElementById(id).innerText = select.value;
+
+        document.getElementById("copySales").innerText = select.value;
+
+        select.remove();
+      });
+
+      return select;
+    }
+
+    // Attach hover functionality to reveal dropdown selector
+    document.querySelectorAll('.calc-value').forEach(item => {
+      item.addEventListener('mouseover', () => {
+        if (!item.querySelector('.dropdown')) {
+          const dropdown = createDropdown(item.id);
+          const selectorDiv = document.createElement('span');
+          selectorDiv.className = 'selector';
+          selectorDiv.appendChild(dropdown);
+          item.appendChild(selectorDiv);
+        }
+        item.querySelector('.dropdown').focus();
+      });
     });
-
-    select.addEventListener('change', () => {
-        console.log(`Selected value: ${select.value}`); 
-      document.getElementById(id).innerText = select.value;
-
-      document.getElementById("copySales").innerText = select.value;
-      
-      select.remove();
-    });
-
-    return select;
-  }
-
-  // Attach hover functionality to reveal dropdown selector
-  document.querySelectorAll('.calc-value').forEach(item => {
-    item.addEventListener('mouseover', () => {
-      if (!item.querySelector('.dropdown')) {
-        const dropdown = createDropdown(item.id);
-        const selectorDiv = document.createElement('span');
-        selectorDiv.className = 'selector';
-        selectorDiv.appendChild(dropdown);
-        item.appendChild(selectorDiv);
-      }
-      item.querySelector('.dropdown').focus();
-    });
-  });
-</script>
+  </script>
 
 </body>
+
 </html>
