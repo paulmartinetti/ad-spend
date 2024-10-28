@@ -119,6 +119,7 @@
         obj.val = select.value;
         updateData(obj);
         //
+        select.removeEventListener('change', this); 
         select.remove();
       });
       return select;
