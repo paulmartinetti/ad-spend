@@ -11,14 +11,14 @@
       line-height: 1.6;
     }
 
-    .calc-value {
+    .inputs {
       display: inline-block;
       cursor: pointer;
       position: relative;
       font-weight: bold;
     }
 
-    .calc-value:hover .selector {
+    .inputs:hover .selector {
       display: inline;
     }
 
@@ -38,19 +38,21 @@
 <body>
 
   <article>
-    <p>Let's say we need to make $<span class="calc-value" id="tsales">5</span> million in sales.</p>
-    <p>And our typical sale is $<span class="calc-value" id="sale">100</span>,000.</p>
-    <p>That means we need to get <span id="contracts">50</span> contracts signed.</p>
-    <p>As we've said, <span class="calc-value" id="pctcontracts">50</span>% of those contracts will likely come from our
+    <p>Let's say we need to make $<span class="inputs" id="tsales">5</span> million in sales.</p>
+    <p>And our typical sale is $<span class="inputs" id="sale">100</span>,000.</p>
+    <p>That means we need to get <span class="outputs" id="contracts">50</span> contracts signed.</p>
+    <p>As we've said, <span class="inputs" id="pctcontracts">50</span>% of those contracts will likely come from our
       marketing efforts. This is where Ad Spend budgeting comes in, that difficult to pin-down sort of number that has
       too many zeros. Is there any rhyme or reason behind this number? Yes! Let's walk through it.</p>
-    <p>We assume that <span id="mcontracts">50</span> contracts will come from qualified leads responding to our
+    <p>We assume that <span class="outputs" id="mcontracts">50</span> contracts will come from qualified leads
+      responding to our
       marketing efforts. This is called an inbound lead. It refers to a new business connection to your company who
       needs your products and services.</p>
-    <p>About <span class="calc-value" id="qleadpct">10</span>% of our qualified leads will sign a contract, meaning that
-      we'll need <span id="qlead">250</span> qualified leads to gain $<span id="halfrev">5</span>MM in revenue.</p>
-    <p>Qualified leads are a subset, let's start with <span class="calc-value" id="pctleads">30</span>% of all leads,
-      meaning that our goal is to gain (250/0.3) or about <span id="tleads">830</span> leads.</p>
+    <p>About <span class="inputs" id="qleadpct">10</span>% of our qualified leads will sign a contract, meaning that
+      we'll need <span class="outputs" id="qleads">250</span> qualified leads to gain $<span class="outputs"
+        id="mpctofrev"></span> in revenue.</p>
+    <p>Qualified leads are a subset of all leads, let's say <span class="inputs" id="pctleads">30</span>%,
+      meaning that our goal is to gain about <span class="outputs" id="tleads">830</span> leads.</p>
     <p>In the digital space (LinkedIn, Google Ads, our Website, etc), a lead happens when an interested person clicks on
       an ad or downloads an article, or writes or calls the company in response to something they see or hear. Properly
       placed ads and articles that make the new connection easy are referred to as implementing a Call-To-Action (CTA).
@@ -60,25 +62,6 @@
 
 
   <script>
-    function calc() {
-
-      // contracts needed
-      const contracts = (getVal("tsales") * 1000000) / (getVal("sale") * 1000);
-      document.getElementById("contracts").textContent = contracts;
-
-      // contracts from marketing
-      const mcontracts = contracts * (getVal("pctcontracts") / 100);
-      document.getElementById("mcontracts").textContent = mcontracts;
-
-      // leads needed
-      const qlead = Math.round(Math.round((mcontracts / (getVal("qleadpct")/100))*100)/100);
-      document.getElementById("qlead").textContent = qlead;
-
-      
-      /* document.getElementById("halfrev").textContent;
-      document.getElementById("tleads").textContent; */
-
-    }
 
     const dataA = [
       { "id": "tsales", "val": 5, "range": ["Select...", 1, 2, 5, 10, 15, 20, 25, 50, 100] },
@@ -96,7 +79,7 @@
         break;
       }
       // recalculate
-      calc();
+      calcOutputs();
     }
     // get val
     function getVal(id) {
@@ -104,6 +87,32 @@
         if (dataA[i].id == id) return dataA[i].val;
       }
     }
+    // update outputs
+    function calcOutputs() {
+
+      // contracts needed
+      const contracts = (getVal("tsales") * 1000000) / (getVal("sale") * 1000);
+      document.getElementById("contracts").textContent = contracts;
+
+      // contracts from marketing
+      const mcontracts = contracts * (getVal("pctcontracts") / 100);
+      document.getElementById("mcontracts").textContent = mcontracts;
+
+      // leads needed
+      const qleads = Math.round((mcontracts / (getVal("qleadpct") / 100)));
+      document.getElementById("qleads").textContent = qleads;
+
+      // marketing percent of revenue
+      let mpctofrev = (getVal("tsales") * 1000000)*(getVal("pctcontracts")/100);
+      // format large number
+      if (mpctofrev>1000000) mpctofrev = mpctofrev/1000000+"MM";
+      document.getElementById("mpctofrev").textContent = mpctofrev;
+
+
+      //document.getElementById("tleads").textContent;
+
+    }
+
     // Function to create a dropdown menu with specific values
     function createDropdown(obj) {
       const select = document.createElement('select');
@@ -134,19 +143,20 @@
         const s = document.getElementById(obj.id);
 
         s.addEventListener('mouseover', function (event) {
+          // only make one per input
           if (!s.querySelector('.dropdown')) {
-          const dropdown = createDropdown(obj);
-          const selectorDiv = document.createElement('span');
-          selectorDiv.className = 'selector';
-          selectorDiv.appendChild(dropdown);
-          s.appendChild(selectorDiv);
+            const dropdown = createDropdown(obj);
+            const selectorDiv = document.createElement('span');
+            selectorDiv.className = 'selector';
+            selectorDiv.appendChild(dropdown);
+            s.appendChild(selectorDiv);
           }
         });
       }
     }
     // startup
     makeSelectors();
-    //item.querySelector('.dropdown').focus();
+    calcOutputs();
 
   </script>
 
