@@ -25,7 +25,7 @@
     .selector {
       display: none;
       position: absolute;
-      left: 0;
+      left: -15px;
       z-index: 10;
     }
 
@@ -44,7 +44,7 @@
     <p>As we've said, <span class="calc-value" id="pctcontracts">50</span>% of those contracts will likely come from our
       marketing efforts. This is where Ad Spend budgeting comes in, that difficult to pin-down sort of number that has
       too many zeros. Is there any rhyme or reason behind this number? Yes! Let's walk through it.</p>
-    <p>We assume that <span id="contracts">50</span> contracts will come from qualified leads responding to our
+    <p>We assume that <span id="mcontracts">50</span> contracts will come from qualified leads responding to our
       marketing efforts. This is called an inbound lead. It refers to a new business connection to your company who
       needs your products and services.</p>
     <p>About <span class="calc-value" id="qleadpct">10</span>% of our qualified leads will sign a contract, meaning that
@@ -61,13 +61,21 @@
 
   <script>
     function calc() {
-      const a = getVal("tsales") * 1000000;
-      const b = getVal("sale") * 1000;
-      document.getElementById("contracts").textContent = divide(a, b);
 
-      /* document.getElementById("pcontracts").textContent;
-      document.getElementById("qlead").textContent;
-      document.getElementById("halfrev").textContent;
+      // contracts needed
+      const contracts = (getVal("tsales") * 1000000) / (getVal("sale") * 1000);
+      document.getElementById("contracts").textContent = contracts;
+
+      // contracts from marketing
+      const mcontracts = contracts * (getVal("pctcontracts") / 100);
+      document.getElementById("mcontracts").textContent = mcontracts;
+
+      // leads needed
+      const qlead = Math.round(Math.round((mcontracts / (getVal("qleadpct")/100))*100)/100);
+      document.getElementById("qlead").textContent = qlead;
+
+      
+      /* document.getElementById("halfrev").textContent;
       document.getElementById("tleads").textContent; */
 
     }
@@ -81,10 +89,6 @@
     ];
 
     // Helpers
-    function divide(a, b) {
-      //return Math.round((a / b * 100)) / 100;
-      return a / b;
-    }
     // update data
     function updateData(obj) {
       for (const i in dataA) {
@@ -114,12 +118,12 @@
       select.addEventListener('change', () => {
         // update display
         document.getElementById(obj.id).innerText = select.value;
-        
+
         // update data
         obj.val = select.value;
         updateData(obj);
         //
-        select.removeEventListener('change', this); 
+        select.removeEventListener('change', this);
         select.remove();
       });
       return select;
@@ -130,11 +134,13 @@
         const s = document.getElementById(obj.id);
 
         s.addEventListener('mouseover', function (event) {
+          if (!s.querySelector('.dropdown')) {
           const dropdown = createDropdown(obj);
           const selectorDiv = document.createElement('span');
           selectorDiv.className = 'selector';
           selectorDiv.appendChild(dropdown);
           s.appendChild(selectorDiv);
+          }
         });
       }
     }
