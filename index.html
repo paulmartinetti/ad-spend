@@ -52,12 +52,35 @@
       we'll need <span class="outputs" id="qleads">250</span> qualified leads to gain $<span class="outputs"
         id="mpctofrev"></span> in revenue.</p>
     <p>Qualified leads are a subset of all leads, let's say <span class="inputs" id="pctleads">30</span>%,
-      meaning that our goal is to gain about <span class="outputs" id="tleads">830</span> leads.</p>
+      meaning that our goal is to gain about <span class="outputs" id="tleads"></span> total leads.</p>
     <p>In the digital space (LinkedIn, Google Ads, our Website, etc), a lead happens when an interested person clicks on
       an ad or downloads an article, or writes or calls the company in response to something they see or hear. Properly
       placed ads and articles that make the new connection easy are referred to as implementing a Call-To-Action (CTA).
     </p>
-    <p></p>
+    <p>To react to something that represents your company, products, or services, this person has to see it or hear
+      about it. These are called views or impressions of our ad, post, article, podcast, etc. The rate at which people
+      who view an ad and click on it to learn more is typically around <span class="inputs" id="clickthru">1.5</span>%.
+    </p>
+    <p>
+      This brings us to about <span class="outputs" id="views"></span> views or impressions that we need to gain these
+      leads. This is referred to as traffic.
+    </p>
+    <p>
+      If this was all ads at a cost per click of $<span class="inputs" id="costpclick">4</span>, our ad spend budget
+      would be $<span class="outputs" id="adspend"></span>. ***this seems low
+    </p>
+    <p>
+      Metrics<br />
+      The right way to manage this process is exactly to do that: manage it! To manage Ad spend as well as all of the
+      other components in our marketing plan is best accomplished by collecting and analyzing the data behind our
+      marketing activities.
+    </p>
+    <p>
+      Here are a few metrics that weigh into our ad spend decision-making.<br />
+      Cost per Lead -<br /><br />
+      Cost per Sale -
+    </p>
+
   </article>
 
 
@@ -68,7 +91,9 @@
       { "id": "sale", "val": 100, "range": ["Select...", 50, 100, 150, 200, 250, 500] },
       { "id": "pctcontracts", "val": 50, "range": ["Select...", 10, 20, 30, 40, 50, 60, 70, 80, 90, 100] },
       { "id": "qleadpct", "val": 10, "range": ["Select...", 1, 2, 5, 10, 20, 30, 40, 50] },
-      { "id": "pctleads", "val": 30, "range": ["Select...", 1, 2, 5, 10, 20, 30, 40, 50] }
+      { "id": "pctleads", "val": 30, "range": ["Select...", 1, 2, 5, 10, 20, 30, 40, 50] },
+      { "id": "clickthru", "val": 1.5, "range": ["Select...", 0.5, 1, 1.5, 2, 2.5, 3, 3.5] },
+      { "id": "costpclick", "val": 4, "range": ["Select...", 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7] }
     ];
 
     // Helpers
@@ -103,14 +128,30 @@
       document.getElementById("qleads").textContent = qleads;
 
       // marketing percent of revenue
-      let mpctofrev = (getVal("tsales") * 1000000)*(getVal("pctcontracts")/100);
+      let mpctofrev = (getVal("tsales") * 1000000) * (getVal("pctcontracts") / 100);
       // format large number
-      if (mpctofrev>1000000) mpctofrev = mpctofrev/1000000+"MM";
-      document.getElementById("mpctofrev").textContent = mpctofrev;
+      let mpStr = "";
+      if (mpctofrev > 1000000) {
+        mpctofrev = mpctofrev / 1000000 + "MM";
+        mpStr = mpctofrev;
+      } else {
+        mpStr = mpctofrev.toLocaleString();
+      }
+      document.getElementById("mpctofrev").textContent = mpStr;
 
+      // total leads needed
+      const tleads = Math.round(qleads / (getVal("pctleads") / 100));
+      document.getElementById("tleads").textContent = tleads;
 
-      //document.getElementById("tleads").textContent;
+      // views
+      const views = Math.round(tleads / (getVal("clickthru") / 100));
+      const vStr = views.toLocaleString();
+      document.getElementById("views").textContent = vStr;
 
+      // cost per click - adspend
+      const adspend = Math.round(tleads * getVal("costpclick"));
+      const adStr = adspend.toLocaleString();
+      document.getElementById("adspend").textContent = adStr;
     }
 
     // Function to create a dropdown menu with specific values
@@ -141,6 +182,7 @@
       for (const i in dataA) {
         const obj = dataA[i];
         const s = document.getElementById(obj.id);
+        //console.log(obj.val)
 
         s.addEventListener('mouseover', function (event) {
           // only make one per input
@@ -157,7 +199,6 @@
     // startup
     makeSelectors();
     calcOutputs();
-
   </script>
 
 </body>
