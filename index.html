@@ -38,9 +38,9 @@
 <body>
 
   <article>
-    <p>Let's say we need to make $<span class="calc-value" id="tsales">15</span> million in sales.</p>
+    <p>Let's say we need to make $<span class="calc-value" id="tsales">5</span> million in sales.</p>
     <p>And our typical sale is $<span class="calc-value" id="sale">100</span>,000.</p>
-    <p>That means we need to get <span id="sale">50</span>contracts signed.</p>
+    <p>That means we need to get <span id="contracts">50</span> contracts signed.</p>
     <p>As we've said, <span class="calc-value" id="pctcontracts">50</span>% of those contracts will likely come from our
       marketing efforts. This is where Ad Spend budgeting comes in, that difficult to pin-down sort of number that has
       too many zeros. Is there any rhyme or reason behind this number? Yes! Let's walk through it.</p>
@@ -61,24 +61,44 @@
 
   <script>
     function calc() {
-      document.getElementById("sale").textContent;
-      document.getElementById("pcontracts").textContent;
+      const a = getVal("tsales") * 1000000;
+      const b = getVal("sale") * 1000;
+      document.getElementById("contracts").textContent = divide(a, b);
+
+      /* document.getElementById("pcontracts").textContent;
       document.getElementById("qlead").textContent;
       document.getElementById("halfrev").textContent;
-      document.getElementById("tleads").textContent;
+      document.getElementById("tleads").textContent; */
+
     }
 
     const dataA = [
-      { "id": "tsales", "val": 15, "range": ["Select...", 1, 2, 5, 10, 15, 20, 25, 50, 100] },
-      { "id": "sale", "val": 50, "range": ["Select...", 50, 100, 150, 200, 250, 500] },
+      { "id": "tsales", "val": 5, "range": ["Select...", 1, 2, 5, 10, 15, 20, 25, 50, 100] },
+      { "id": "sale", "val": 100, "range": ["Select...", 50, 100, 150, 200, 250, 500] },
       { "id": "pctcontracts", "val": 50, "range": ["Select...", 10, 20, 30, 40, 50, 60, 70, 80, 90, 100] },
       { "id": "qleadpct", "val": 10, "range": ["Select...", 1, 2, 5, 10, 20, 30, 40, 50] },
-      { "id": "pctleads", "val": 30, "range": ["Select...", 1, 2, 5, 10, 20, 30, 40, 50] },
+      { "id": "pctleads", "val": 30, "range": ["Select...", 1, 2, 5, 10, 20, 30, 40, 50] }
     ];
 
-    // Helper
+    // Helpers
     function divide(a, b) {
-      return Math.round((a / b * 100)) / 100;
+      //return Math.round((a / b * 100)) / 100;
+      return a / b;
+    }
+    // update data
+    function updateData(obj) {
+      for (const i in dataA) {
+        if (dataA[i] == obj.id) dataA[i].val = obj.val;
+        break;
+      }
+      // recalculate
+      calc();
+    }
+    // get val
+    function getVal(id) {
+      for (const i in dataA) {
+        if (dataA[i].id == id) return dataA[i].val;
+      }
     }
     // Function to create a dropdown menu with specific values
     function createDropdown(obj) {
@@ -92,10 +112,13 @@
         select.appendChild(option);
       });
       select.addEventListener('change', () => {
-        // console.log(`Selected value: ${select.value}`); 
+        // update display
         document.getElementById(obj.id).innerText = select.value;
+        
         // update data
-        // 
+        obj.val = select.value;
+        updateData(obj);
+        //
         select.remove();
       });
       return select;
