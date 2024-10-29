@@ -116,11 +116,11 @@
     function calcOutputs() {
 
       // contracts needed
-      const contracts = (getVal("tsales") * 1000000) / (getVal("sale") * 1000);
+      const contracts = Math.round((getVal("tsales") * 1000000) / (getVal("sale") * 1000));
       document.getElementById("contracts").textContent = contracts;
 
       // contracts from marketing
-      const mcontracts = contracts * (getVal("pctcontracts") / 100);
+      const mcontracts = Math.round(contracts * (getVal("pctcontracts") / 100));
       document.getElementById("mcontracts").textContent = mcontracts;
 
       // leads needed
@@ -141,7 +141,8 @@
 
       // total leads needed
       const tleads = Math.round(qleads / (getVal("pctleads") / 100));
-      document.getElementById("tleads").textContent = tleads;
+      const tlStr = tleads.toLocaleString();
+      document.getElementById("tleads").textContent = tlStr;
 
       // views
       const views = Math.round(tleads / (getVal("clickthru") / 100));
