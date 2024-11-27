@@ -61,10 +61,10 @@
     }
 
     .row {
-      margin-top: 50px;
+      margin-top: 10px;
       display: flex;
-      margin-left: -15px;
-      margin-right: -15px;
+      margin-left: 15px;
+      margin-right: 15px;
     }
 
     .column {
@@ -84,7 +84,7 @@
       padding-top: 20px;
       margin-left: 15px;
       font-family: 'Merriweather', Arial, Sans-Serif;
-      color:white;
+      color: white;
     }
 
     .flabel {
@@ -105,7 +105,7 @@
       margin-left: 150px;
       width: 90%;
       margin: 0 auto;
-      background-color:#003555;
+      background-color: #003555;
     }
 
     ::-webkit-scrollbar {
@@ -141,34 +141,150 @@
     <div class="row">
       <div class="column" id="box2">
         <label class="clabel">How to Use this Tool</label>
-        <p>1. Choose a total sales goal for the year.</p>
-        <p>2. Choose a value to represent a typical or average contract.</p>
-        <p>3. This gives us the number of contracts needed.</p>
-
-        <label class="clabel">Nav</label>
-        <div class="box" id="box6">
-          <button class="nav-button" onclick="emailBtn()">Email
-          </button>
-          <button class="nav-button" onclick="resetBtn()">Reset
-          </button>
-        </div>
       </div>
-
       <div class="column" id="box3">
         <label class="clabel">Calculate - point to any bold number to change it</label>
-        <p>$<span class="inputs" id="tsales">5</span> million in sales</p>
-        <p>$<span class="inputs" id="sale">100</span>,000 per contract</p>
-        <p><span class="outputs" id="contracts">50</span> contracts signed</p>
-
       </div>
     </div>
-    <br><br>
-    <h5 style="white-space: pre-wrap; text-align: center; font-size: 12px"><strong>Designed and programmed by Bracken
-        Senior Partner, Paul Martinetti, MD</strong></h5>
-    <br><br>
+    <div class="row">
+      <div class="column" id="box2">
+        <p>1. Choose a total sales goal for the year.</p>
+      </div>
+      <div class="column" id="box3">
+        <p>$<span class="inputs" id="tsales">5</span> million in sales</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p>2. Choose a value to represent a typical or average contract.</p>
+      </div>
+      <div class="column" id="box3">
+        <p>$<span class="inputs" id="sale">100</span>,000 per contract</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p>3. This gives us the number of contracts needed.</p>
+      </div>
+      <div class="column" id="box3">
+        <p><span class="outputs" id="contracts">50</span> contracts signed</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p>4. Choose the percentage of these contracts that will come from Marketing</p>
+      </div>
+      <div class="column" id="box3">
+        <p><span class="inputs" id="pctcontracts">50</span>% of those contracts will likely come from our
+          marketing efforts</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p>5. The number of contracts from Marketing is therefore:</p>
+      </div>
+      <div class="column" id="box3">
+        <p><span class="outputs" id="mcontracts">50</span> contracts</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p>7. Choose the percentage of qualified leads who will sign a contract.</p>
+      </div>
+      <div class="column" id="box3">
+        <p><span class="inputs" id="qleadpct">10</span>% of our qualified leads will sign a contract</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p>8. This is how many qualified leads we will need:</p>
+      </div>
+      <div class="column" id="box3">
+        <p><span class="outputs" id="qleads">250</span> qualified leads</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p>9. Choose a percentage of all leads that become qualified:</p>
+      </div>
+      <div class="column" id="box3">
+        <p><span class="inputs" id="pctleads">30</span>%</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p>10. This is how many leads we will need:</p>
+      </div>
+      <div class="column" id="box3">
+        <p><span class="outputs" id="tleads"></span> total leads.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p>11. Choose a percentage of ad clicks that become leads. In life sciences this is typically between 1 and 3%
+        </p>
+      </div>
+      <div class="column" id="box3">
+        <p><span class="inputs" id="clickstoleads">2</span>% </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p>12. This is how many ad clicks we'll need to generate those leads</p>
+      </div>
+      <div class="column" id="box3">
+        <p><span class="outputs" id="ctleads"></span> clicks.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p>13. Choose a percentage of viewed ads that are clicked (click through rate):</p>
+      </div>
+      <div class="column" id="box3">
+        <p><span class="inputs" id="clickthru">1.5</span>% is pretty typical</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p>14. This is how many ad placements we'll need:</p>
+      </div>
+      <div class="column" id="box3">
+        <p><span class="outputs" id="views"></span> views</p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="column" id="box2">
+        <p>.</p>
+      </div>
+      <div class="column" id="box3">
+        <p></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column" id="box2">
+        <p>.</p>
+      </div>
+      <div class="column" id="box3">
+        <p></p>
+      </div>
+    </div>
+
   </section>
 
-  <!--article>
+  <article>
     <p>Let's say we need to make $<span class="inputs" id="tsales">5</span> million in sales.</p>
     <p>And our typical sale is $<span class="inputs" id="sale">100</span>,000.</p>
     <p>That means we need to get <span class="outputs" id="contracts">50</span> contracts signed.</p>
@@ -212,7 +328,7 @@
       Cost per Sale -
     </p>
 
-  </article-->
+  </article>
 
 
   <script>
@@ -223,6 +339,7 @@
       { "id": "pctcontracts", "val": 50, "range": ["Select...", 10, 20, 30, 40, 50, 60, 70, 80, 90, 100] },
       { "id": "qleadpct", "val": 10, "range": ["Select...", 1, 2, 5, 10, 20, 30, 40, 50] },
       { "id": "pctleads", "val": 30, "range": ["Select...", 1, 2, 5, 10, 20, 30, 40, 50] },
+      { "id": "clickstoleads", "val": 2, "range": ["Select...", 1, 1.5, 2, 2.5, 3] },
       { "id": "clickthru", "val": 1.5, "range": ["Select...", 0.5, 1, 1.5, 2, 2.5, 3, 3.5] },
       { "id": "costpclick", "val": 4, "range": ["Select...", 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7] }
     ];
@@ -275,8 +392,13 @@
       const tlStr = tleads.toLocaleString();
       document.getElementById("tleads").textContent = tlStr;
 
+      // pct of clicks to leads
+      const ctleads = Math.round(tleads / (getVal("clickstoleads") / 100));
+      const ctlStr = ctleads.toLocaleString();
+      document.getElementById("ctleads").textContent = ctlStr;
+
       // views
-      const views = Math.round(tleads / (getVal("clickthru") / 100));
+      const views = Math.round(ctleads / (getVal("clickthru") / 100));
       const vStr = views.toLocaleString();
       document.getElementById("views").textContent = vStr;
 
