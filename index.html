@@ -8,7 +8,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      line-height: 1.6;
+      line-height: 1.4;
       color: white;
     }
 
@@ -258,33 +258,34 @@
 
     <div class="row">
       <div class="column" id="box2">
-        <p>14. This is how many ad placements we'll need:</p>
+        <p>14. This is how many ad views we'll need:</p>
       </div>
       <div class="column" id="box3">
         <p><span class="outputs" id="views"></span> views</p>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="column" id="box2">
-        <p>.</p>
+        <p>15. Choose a cost per click.</p>
       </div>
       <div class="column" id="box3">
-        <p></p>
+        <p>$<span class="inputs" id="costpclick">4</span></p>
       </div>
     </div>
+
     <div class="row">
       <div class="column" id="box2">
-        <p>.</p>
+        <p>16. This is what the ad spend will be:</p>
       </div>
       <div class="column" id="box3">
-        <p></p>
+        <p>$<span class="outputs" id="adspend"></span></p>
       </div>
     </div>
 
   </section>
 
-  <article>
+  <!-- <article>
     <p>Let's say we need to make $<span class="inputs" id="tsales">5</span> million in sales.</p>
     <p>And our typical sale is $<span class="inputs" id="sale">100</span>,000.</p>
     <p>That means we need to get <span class="outputs" id="contracts">50</span> contracts signed.</p>
@@ -328,7 +329,7 @@
       Cost per Sale -
     </p>
 
-  </article>
+  </article> -->
 
 
   <script>
@@ -376,7 +377,7 @@
       document.getElementById("qleads").textContent = qleads;
 
       // marketing percent of revenue
-      let mpctofrev = (getVal("tsales") * 1000000) * (getVal("pctcontracts") / 100);
+      /* let mpctofrev = (getVal("tsales") * 1000000) * (getVal("pctcontracts") / 100);
       // format large number
       let mpStr = "";
       if (mpctofrev > 1000000) {
@@ -385,7 +386,7 @@
       } else {
         mpStr = mpctofrev.toLocaleString();
       }
-      document.getElementById("mpctofrev").textContent = mpStr;
+      document.getElementById("mpctofrev").textContent = mpStr; */
 
       // total leads needed
       const tleads = Math.round(qleads / (getVal("pctleads") / 100));
@@ -403,7 +404,7 @@
       document.getElementById("views").textContent = vStr;
 
       // cost per click - adspend
-      const adspend = Math.round(tleads * getVal("costpclick"));
+      const adspend = Math.round(ctleads * getVal("costpclick"));
       const adStr = adspend.toLocaleString();
       document.getElementById("adspend").textContent = adStr;
     }
