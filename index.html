@@ -4,11 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Marketing Profit Article</title>
+  <title>Ad Spend Calculator</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
+      color: white;
     }
 
     .inputs {
@@ -32,12 +33,142 @@
     .selector select {
       width: auto;
     }
+
+    .custom-button,
+    .nav-button {
+      background-color: #003555;
+      /* blue background */
+      border: 1px solid;
+      color: white;
+      /* White text */
+      padding: 5px;
+      /* Padding for text */
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 12px;
+      /* Text size */
+      font-family: Arial, Sans-Serif;
+      border-radius: 5px;
+      /* Rounded corners */
+      cursor: pointer;
+      margin: 2px;
+    }
+
+    .nav-button {
+      background-color: #39b449;
+      /* Green background */
+    }
+
+    .row {
+      margin-top: 50px;
+      display: flex;
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+
+    .column {
+      flex: 1;
+      /* Ensures each column takes up equal space */
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .box {
+      /*border-color: #39b449;*/
+      margin: 10px;
+      margin-top: 2px;
+    }
+
+    .clabel {
+      padding-top: 20px;
+      margin-left: 15px;
+      font-family: 'Merriweather', Arial, Sans-Serif;
+      color:white;
+    }
+
+    .flabel {
+      display: block;
+      font-size: 12px;
+      font-weight: bold;
+      text-align: center;
+      /* Text size */
+      font-family: Arial, Sans-Serif;
+      color: #003555;
+    }
+
+    input {
+      padding: 5px;
+    }
+
+    #box1 {
+      margin-left: 150px;
+      width: 90%;
+      margin: 0 auto;
+      background-color:#003555;
+    }
+
+    ::-webkit-scrollbar {
+      width: 12px;
+      /* width of the entire scrollbar */
+    }
+
+    /* Targets the draggable part of the scrollbar */
+    ::-webkit-scrollbar-thumb {
+      background-color: darkgrey;
+      /* color of the draggable part */
+      border-radius: 10px;
+      /* roundness of the draggable part */
+      border: 3px solid transparent;
+      /* creates padding around the thumb */
+      background-clip: padding-box;
+      /* prevents the background color from spilling into the border area */
+    }
+
+    /* Targets the part of the scrollbar track where there's no thumb */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      /* color of the rest of the scrollbar */
+      border-radius: 10px;
+      /* roundness of the track */
+    }
   </style>
 </head>
 
 <body>
 
-  <article>
+  <section class="section" id="box1">
+    <div class="row">
+      <div class="column" id="box2">
+        <label class="clabel">How to Use this Tool</label>
+        <p>1. Choose a total sales goal for the year.</p>
+        <p>2. Choose a value to represent a typical or average contract.</p>
+        <p>3. This gives us the number of contracts needed.</p>
+
+        <label class="clabel">Nav</label>
+        <div class="box" id="box6">
+          <button class="nav-button" onclick="emailBtn()">Email
+          </button>
+          <button class="nav-button" onclick="resetBtn()">Reset
+          </button>
+        </div>
+      </div>
+
+      <div class="column" id="box3">
+        <label class="clabel">Calculate - point to any bold number to change it</label>
+        <p>$<span class="inputs" id="tsales">5</span> million in sales</p>
+        <p>$<span class="inputs" id="sale">100</span>,000 per contract</p>
+        <p><span class="outputs" id="contracts">50</span> contracts signed</p>
+
+      </div>
+    </div>
+    <br><br>
+    <h5 style="white-space: pre-wrap; text-align: center; font-size: 12px"><strong>Designed and programmed by Bracken
+        Senior Partner, Paul Martinetti, MD</strong></h5>
+    <br><br>
+  </section>
+
+  <!--article>
     <p>Let's say we need to make $<span class="inputs" id="tsales">5</span> million in sales.</p>
     <p>And our typical sale is $<span class="inputs" id="sale">100</span>,000.</p>
     <p>That means we need to get <span class="outputs" id="contracts">50</span> contracts signed.</p>
@@ -81,7 +212,7 @@
       Cost per Sale -
     </p>
 
-  </article>
+  </article-->
 
 
   <script>
