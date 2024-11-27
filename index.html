@@ -72,6 +72,10 @@
       /* Ensures each column takes up equal space */
       padding-left: 15px;
       padding-right: 15px;
+      /*border-left: 1px solid;
+      border-bottom: 1px solid;
+      border-color: white;*/
+
     }
 
     .box {
@@ -84,6 +88,7 @@
       padding-top: 20px;
       margin-left: 15px;
       font-family: 'Merriweather', Arial, Sans-Serif;
+      font-size: 1.2em;
       color: white;
     }
 
@@ -107,7 +112,7 @@
       margin: 0 auto;
       background-color: #003555;
     }
-
+   
     ::-webkit-scrollbar {
       width: 12px;
       /* width of the entire scrollbar */
@@ -143,7 +148,7 @@
         <label class="clabel">How to Use this Tool</label>
       </div>
       <div class="column" id="box3">
-        <label class="clabel">Calculate - point to any bold number to change it</label>
+        <label class="clabel">Calculate - point to any <b>bold</b> number to change it</label>
       </div>
     </div>
     <div class="row">
@@ -189,6 +194,14 @@
       </div>
       <div class="column" id="box3">
         <p><span class="outputs" id="mcontracts">50</span> contracts</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column" id="box2">
+        <p>6. These <span class="outputs" id="mcontracts2"></span> contracts will yield:</p>
+      </div>
+      <div class="column" id="box3">
+        <p><span class="outputs" id="mpctofrev">50</span> in revenue.</p>
       </div>
     </div>
 
@@ -240,7 +253,7 @@
 
     <div class="row">
       <div class="column" id="box2">
-        <p>12. This is how many ad clicks we'll need to generate those leads</p>
+        <p>12. This is how many ad clicks we'll need to generate <span class="outputs" id="tleads2"></span> leads</p>
       </div>
       <div class="column" id="box3">
         <p><span class="outputs" id="ctleads"></span> clicks.</p>
@@ -276,61 +289,16 @@
 
     <div class="row">
       <div class="column" id="box2">
-        <p>16. This is what the ad spend will be:</p>
+        <p>16. This is the ad investment needed to generate <span class="outputs" id="mpctofrev2">50</span> of revenue, thus positioning our marketing efforts as a profit center.</p>
       </div>
       <div class="column" id="box3">
         <p>$<span class="outputs" id="adspend"></span></p>
       </div>
     </div>
+    <br /><br />
+    <br /><br />
 
   </section>
-
-  <!-- <article>
-    <p>Let's say we need to make $<span class="inputs" id="tsales">5</span> million in sales.</p>
-    <p>And our typical sale is $<span class="inputs" id="sale">100</span>,000.</p>
-    <p>That means we need to get <span class="outputs" id="contracts">50</span> contracts signed.</p>
-    <p>As we've said, <span class="inputs" id="pctcontracts">50</span>% of those contracts will likely come from our
-      marketing efforts. This is where Ad Spend budgeting comes in, that difficult to pin-down sort of number that has
-      too many zeros. Is there any rhyme or reason behind this number? Yes! Let's walk through it.</p>
-    <p>We assume that <span class="outputs" id="mcontracts">50</span> contracts will come from qualified leads
-      responding to our
-      marketing efforts. This is called an inbound lead. It refers to a new business connection to your company who
-      needs your products and services.</p>
-    <p>About <span class="inputs" id="qleadpct">10</span>% of our qualified leads will sign a contract, meaning that
-      we'll need <span class="outputs" id="qleads">250</span> qualified leads to gain $<span class="outputs"
-        id="mpctofrev"></span> in revenue.</p>
-    <p>Qualified leads are a subset of all leads, let's say <span class="inputs" id="pctleads">30</span>%,
-      meaning that our goal is to gain about <span class="outputs" id="tleads"></span> total leads.</p>
-    <p>In the digital space (LinkedIn, Google Ads, our Website, etc), a lead happens when an interested person clicks on
-      an ad or downloads an article, or writes or calls the company in response to something they see or hear. Properly
-      placed ads and articles that make the new connection easy are referred to as implementing a Call-To-Action (CTA).
-    </p>
-    <p>To react to something that represents your company, products, or services, this person has to see it or hear
-      about it. These are called views or impressions of our ad, post, article, podcast, etc. The rate at which people
-      who view an ad and click on it to learn more is typically around <span class="inputs" id="clickthru">1.5</span>%.
-    </p>
-    <p>
-      This brings us to about <span class="outputs" id="views"></span> views or impressions that we need to gain these
-      leads. This is referred to as traffic.
-    </p>
-    <p>
-      If this was all ads at a cost per click of $<span class="inputs" id="costpclick">4</span>, our ad spend budget
-      would be $<span class="outputs" id="adspend"></span>. ***this seems low
-    </p>
-    <p>
-      Metrics<br />
-      The right way to manage this process is exactly to do that: manage it! To manage Ad spend as well as all of the
-      other components in our marketing plan is best accomplished by collecting and analyzing the data behind our
-      marketing activities.
-    </p>
-    <p>
-      Here are a few metrics that weigh into our ad spend decision-making.<br />
-      Cost per Lead -<br /><br />
-      Cost per Sale -
-    </p>
-
-  </article> -->
-
 
   <script>
 
@@ -371,13 +339,14 @@
       // contracts from marketing
       const mcontracts = Math.round(contracts * (getVal("pctcontracts") / 100));
       document.getElementById("mcontracts").textContent = mcontracts;
+      document.getElementById("mcontracts2").textContent = mcontracts;
 
       // leads needed
       const qleads = Math.round((mcontracts / (getVal("qleadpct") / 100)));
       document.getElementById("qleads").textContent = qleads;
 
       // marketing percent of revenue
-      /* let mpctofrev = (getVal("tsales") * 1000000) * (getVal("pctcontracts") / 100);
+      let mpctofrev = (getVal("tsales") * 1000000) * (getVal("pctcontracts") / 100);
       // format large number
       let mpStr = "";
       if (mpctofrev > 1000000) {
@@ -386,12 +355,14 @@
       } else {
         mpStr = mpctofrev.toLocaleString();
       }
-      document.getElementById("mpctofrev").textContent = mpStr; */
+      document.getElementById("mpctofrev").textContent = mpStr;
+      document.getElementById("mpctofrev2").textContent = mpStr;
 
       // total leads needed
       const tleads = Math.round(qleads / (getVal("pctleads") / 100));
       const tlStr = tleads.toLocaleString();
       document.getElementById("tleads").textContent = tlStr;
+      document.getElementById("tleads2").textContent = tlStr;
 
       // pct of clicks to leads
       const ctleads = Math.round(tleads / (getVal("clickstoleads") / 100));
