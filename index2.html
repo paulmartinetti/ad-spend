@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Spend Calculator</title>
+    <style>
+        .mytext {
+            color: #eeeeee;
+        }
+
+        .row {
+            margin-top: 10px;
+            display: flex;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
+        .column {
+            flex: 1;
+            /* Ensures each column takes up equal space */
+            padding-left: 10px;
+            padding-right: 10px;
+            /*border-left: 1px solid;
+      border-bottom: 1px solid;
+      border-color: white;*/
+
+        }
+
+        .clabel {
+            padding-top: 20px;
+            margin-left: 15px;
+            font-family: 'Merriweather', Arial, Sans-Serif;
+            font-size: 1.2em;
+            color: white;
+        }
+
+        #box1 {
+            margin-left: 150px;
+            width: 90%;
+            margin: 0 auto;
+            background-color: #003555;
+        }
+
+        .plus,
+        .minus {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            height: 25px;
+            /* Slightly larger for better usability */
+            width: 25px;
+            background: linear-gradient(135deg, #32a852, #39b449);
+            /* Gradient background */
+            border-radius: 50%;
+            /* Fully circular shape */
+            border: 2px solid #2e943f;
+            /* Slightly darker border for contrast */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            /* Subtle shadow */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            /* Smooth transition for hover effects */
+        }
+
+        .plus:hover,
+        .minus:hover {
+            background: linear-gradient(135deg, #39b449, #32a852);
+            /* Reverse gradient on hover */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+            /* Slightly deeper shadow */
+            transform: scale(1.1);
+            /* Slightly enlarge on hover */
+        }
+
+        .plus:active,
+        .minus:active {
+            background: #2e943f;
+            /* Darker background on click */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            /* Reduced shadow */
+            transform: scale(1.05);
+            /* Slightly smaller scale on click */
+        }
+
+
+        ::-webkit-scrollbar {
+            width: 12px;
+            /* width of the entire scrollbar */
+        }
+
+        /* Targets the draggable part of the scrollbar */
+        ::-webkit-scrollbar-thumb {
+            background-color: darkgrey;
+            /* color of the draggable part */
+            border-radius: 10px;
+            /* roundness of the draggable part */
+            border: 3px solid transparent;
+            /* creates padding around the thumb */
+            background-clip: padding-box;
+            /* prevents the background color from spilling into the border area */
+        }
+
+        /* Targets the part of the scrollbar track where there's no thumb */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            /* color of the rest of the scrollbar */
+            border-radius: 10px;
+            /* roundness of the track */
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="section" id="box1">
+        <div class="row">
+            <div class="column" id="box2">
+                <label class="clabel">How to Use this Tool</label>
+            </div>
+            <div class="column" id="box3">
+                <label class="clabel">Calculate - point to any <b>bold</b> number to change it</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">1. Choose a total sales goal for the year.</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext">$<span class="inputs" id="tsales">5</span> million in sales
+                    <button class="plus" onclick="increment('tsales')">+</button>
+                    <button class="minus" onclick="decrement('tsales')">-</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">2. Choose a value to represent a typical or average contract.</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext">$<span class="inputs" id="sale">100</span>,000 per contract
+                    <button class="plus" onclick="increment('sale')">+</button>
+                    <button class="minus" onclick="decrement('sale')">-</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">3. This gives us the number of contracts needed.</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext"><span class="outputs" id="contracts">50</span> contracts signed</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">4. Choose the percentage of these contracts that will come from Marketing</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext"><span class="inputs" id="pctcontracts">50</span>% <button class="plus"
+                        onclick="increment('pctcontracts')">+</button>
+                    <button class="minus" onclick="decrement('pctcontracts')">-</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">5. The number of contracts from Marketing is therefore:</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext"><span class="outputs" id="mcontracts">50</span> contracts</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">6. These <span class="outputs" id="mcontracts2"></span> contracts will yield:</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext">$<span class="outputs" id="mpctofrev">50</span> in revenue.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">7. Choose the percentage of qualified leads who will sign a contract.</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext"><span class="inputs" id="qleadpct">10</span>% <button class="plus"
+                        onclick="increment('qleadpct')">+</button>
+                    <button class="minus" onclick="decrement('qleadpct')">-</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">8. This is how many qualified leads we will need:</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext"><span class="outputs" id="qleads">250</span> qualified leads</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">9. Choose a percentage of all leads that become qualified:</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext"><span class="inputs" id="pctleads">30</span>% <button class="plus"
+                        onclick="increment('pctleads')">+</button>
+                    <button class="minus" onclick="decrement('pctleads')">-</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">10. This is how many leads we will need:</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext"><span class="outputs" id="tleads"></span> total leads.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">11. Choose a percentage of ad clicks that become leads. In life sciences this is
+                    typically between 1 and 3%
+                </p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext"><span class="inputs" id="clickstoleads">2</span>% <button class="plus"
+                        onclick="increment('clickstoleads')">+</button>
+                    <button class="minus" onclick="decrement('clickstoleads')">-</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">12. This is how many ad clicks we'll need to generate <span class="outputs"
+                        id="tleads2"></span> leads</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext"><span class="outputs" id="ctleads"></span> clicks.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">13. Choose a percentage of viewed ads that are clicked (click through rate):</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext"><span class="inputs" id="clickthru">1.5</span>% <button class="plus"
+                        onclick="increment('clickthru')">+</button>
+                    <button class="minus" onclick="decrement('clickthru')">-</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">14. This is how many ad views we'll need:</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext"><span class="outputs" id="views"></span> views</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">15. Choose a cost per click.</p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext">$<span class="inputs" id="costpclick">4</span> <button class="plus"
+                        onclick="increment('costpclick')">+</button>
+                    <button class="minus" onclick="decrement('costpclick')">-</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" id="box2">
+                <p class="mytext">16. This is the ad investment needed to generate $<span class="outputs"
+                        id="mpctofrev2">50</span> of revenue, thus positioning our marketing efforts as a profit center.
+                </p>
+            </div>
+            <div class="column" id="box3">
+                <p class="mytext">$<span class="outputs" id="adspend"></span></p>
+            </div>
+        </div>
+        <br /><br />
+        <br /><br />
+
+    </section>
+
+    <script>
+
+        const dataA = [
+            { "id": "tsales", "ind": 2, "range": [1, 2, 5, 10, 15, 20, 25, 50, 100] },
+            { "id": "sale", "ind": 1, "range": [50, 100, 150, 200, 250, 500] },
+            { "id": "pctcontracts", "ind": 4, "range": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100] },
+            { "id": "qleadpct", "ind": 3, "range": [1, 2, 5, 10, 20, 30, 40, 50] },
+            { "id": "pctleads", "ind": 5, "range": [1, 2, 5, 10, 20, 30, 40, 50] },
+            { "id": "clickstoleads", "ind": 2, "range": [1, 1.5, 2, 2.5, 3] },
+            { "id": "clickthru", "ind": 2, "range": [0.5, 1, 1.5, 2, 2.5, 3, 3.5] },
+            { "id": "costpclick", "ind": 5, "range": [1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7] }
+        ];
+
+        // Helpers
+        // update data
+        function increment(id) {
+            // search data
+            for (const i in dataA) {
+                // find obj
+                if (dataA[i].id == id) {
+                    // check upper
+                    if (dataA[i].ind < (dataA[i].range.length - 1)) {
+                        dataA[i].ind++;
+                    }
+                    break;
+                }
+            }
+            // recalculate
+            calcOutputs();
+        }
+        function decrement(id) {
+            // search data
+            for (const i in dataA) {
+                // find obj
+                if (dataA[i].id == id) {
+                    // check upper
+                    if (dataA[i].ind > 0) {
+                        dataA[i].ind--;
+                    }
+                    break;
+                }
+            }
+            // recalculate
+            calcOutputs();
+        }
+        // get val
+        function getVal(id) {
+            for (const i in dataA) {
+                if (dataA[i].id == id) {
+                    const t = dataA[i].ind;
+                    return dataA[i].range[t];
+                }
+            }
+        }
+        // update outputs
+        function calcOutputs() {
+
+            // update inputs
+            document.getElementById("tsales").textContent = getVal("tsales");
+            document.getElementById("sale").textContent = getVal("sale");
+            document.getElementById("pctcontracts").textContent = getVal("pctcontracts");
+            document.getElementById("qleadpct").textContent = getVal("qleadpct");
+            document.getElementById("pctleads").textContent = getVal("pctleads");
+            document.getElementById("clickstoleads").textContent = getVal("clickstoleads");
+            document.getElementById("clickthru").textContent = getVal("clickthru");
+            document.getElementById("costpclick").textContent = getVal("costpclick");
+
+            // contracts needed
+            const contracts = Math.round((getVal("tsales") * 1000000) / (getVal("sale") * 1000));
+            document.getElementById("contracts").textContent = contracts;
+
+            // contracts from marketing
+            const mcontracts = Math.round(contracts * (getVal("pctcontracts") / 100));
+            document.getElementById("mcontracts").textContent = mcontracts;
+            document.getElementById("mcontracts2").textContent = mcontracts;
+
+            // leads needed
+            const qleads = Math.round((mcontracts / (getVal("qleadpct") / 100)));
+            document.getElementById("qleads").textContent = qleads;
+
+            // marketing percent of revenue
+            let mpctofrev = (getVal("tsales") * 1000000) * (getVal("pctcontracts") / 100);
+            // format large number
+            let mpStr = "";
+            if (mpctofrev > 1000000) {
+                mpctofrev = mpctofrev / 1000000 + "MM";
+                mpStr = mpctofrev;
+            } else {
+                mpStr = mpctofrev.toLocaleString();
+            }
+            document.getElementById("mpctofrev").textContent = mpStr;
+            document.getElementById("mpctofrev2").textContent = mpStr;
+
+            // total leads needed
+            const tleads = Math.round(qleads / (getVal("pctleads") / 100));
+            const tlStr = tleads.toLocaleString();
+            document.getElementById("tleads").textContent = tlStr;
+            document.getElementById("tleads2").textContent = tlStr;
+
+            // pct of clicks to leads
+            const ctleads = Math.round(tleads / (getVal("clickstoleads") / 100));
+            const ctlStr = ctleads.toLocaleString();
+            document.getElementById("ctleads").textContent = ctlStr;
+
+            // views
+            const views = Math.round(ctleads / (getVal("clickthru") / 100));
+            const vStr = views.toLocaleString();
+            document.getElementById("views").textContent = vStr;
+
+            // cost per click - adspend
+            const adspend = Math.round(ctleads * getVal("costpclick"));
+            const adStr = adspend.toLocaleString();
+            document.getElementById("adspend").textContent = adStr;
+        }
+
+        // startup
+        calcOutputs();
+    </script>
+
+</body>
+
+</html>
