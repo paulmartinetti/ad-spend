@@ -12,6 +12,10 @@
       color: white;
     }
 
+    .mytext{
+      color: #eeeeee;
+    }
+
     .inputs {
       display: inline-block;
       cursor: pointer;
@@ -21,6 +25,7 @@
 
     .inputs:hover .selector {
       display: inline;
+
     }
 
     .selector {
@@ -32,32 +37,6 @@
 
     .selector select {
       width: auto;
-    }
-
-    .custom-button,
-    .nav-button {
-      background-color: #003555;
-      /* blue background */
-      border: 1px solid;
-      color: white;
-      /* White text */
-      padding: 5px;
-      /* Padding for text */
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 12px;
-      /* Text size */
-      font-family: Arial, Sans-Serif;
-      border-radius: 5px;
-      /* Rounded corners */
-      cursor: pointer;
-      margin: 2px;
-    }
-
-    .nav-button {
-      background-color: #39b449;
-      /* Green background */
     }
 
     .row {
@@ -153,146 +132,146 @@
     </div>
     <div class="row">
       <div class="column" id="box2">
-        <p>1. Choose a total sales goal for the year.</p>
+        <p class="mytext">1. Choose a total sales goal for the year.</p>
       </div>
       <div class="column" id="box3">
-        <p>$<span class="inputs" id="tsales">5</span> million in sales</p>
+        <p class="mytext">$<span class="inputs" id="tsales">5</span> million in sales</p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>2. Choose a value to represent a typical or average contract.</p>
+        <p class="mytext">2. Choose a value to represent a typical or average contract.</p>
       </div>
       <div class="column" id="box3">
-        <p>$<span class="inputs" id="sale">100</span>,000 per contract</p>
+        <p class="mytext">$<span class="inputs" id="sale">100</span>,000 per contract</p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>3. This gives us the number of contracts needed.</p>
+        <p class="mytext">3. This gives us the number of contracts needed.</p>
       </div>
       <div class="column" id="box3">
-        <p><span class="outputs" id="contracts">50</span> contracts signed</p>
+        <p class="mytext"><span class="outputs" id="contracts">50</span> contracts signed</p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>4. Choose the percentage of these contracts that will come from Marketing</p>
+        <p class="mytext">4. Choose the percentage of these contracts that will come from Marketing</p>
       </div>
       <div class="column" id="box3">
-        <p><span class="inputs" id="pctcontracts">50</span>% of those contracts will likely come from our
+        <p class="mytext"><span class="inputs" id="pctcontracts">50</span>% of those contracts will likely come from our
           marketing efforts</p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>5. The number of contracts from Marketing is therefore:</p>
+        <p class="mytext">5. The number of contracts from Marketing is therefore:</p>
       </div>
       <div class="column" id="box3">
-        <p><span class="outputs" id="mcontracts">50</span> contracts</p>
+        <p class="mytext"><span class="outputs" id="mcontracts">50</span> contracts</p>
       </div>
     </div>
     <div class="row">
       <div class="column" id="box2">
-        <p>6. These <span class="outputs" id="mcontracts2"></span> contracts will yield:</p>
+        <p class="mytext">6. These <span class="outputs" id="mcontracts2"></span> contracts will yield:</p>
       </div>
       <div class="column" id="box3">
-        <p><span class="outputs" id="mpctofrev">50</span> in revenue.</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="column" id="box2">
-        <p>7. Choose the percentage of qualified leads who will sign a contract.</p>
-      </div>
-      <div class="column" id="box3">
-        <p><span class="inputs" id="qleadpct">10</span>% of our qualified leads will sign a contract</p>
+        <p class="mytext">$<span class="outputs" id="mpctofrev">50</span> in revenue.</p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>8. This is how many qualified leads we will need:</p>
+        <p class="mytext">7. Choose the percentage of qualified leads who will sign a contract.</p>
       </div>
       <div class="column" id="box3">
-        <p><span class="outputs" id="qleads">250</span> qualified leads</p>
+        <p class="mytext"><span class="inputs" id="qleadpct">10</span>% of our qualified leads will sign a contract</p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>9. Choose a percentage of all leads that become qualified:</p>
+        <p class="mytext">8. This is how many qualified leads we will need:</p>
       </div>
       <div class="column" id="box3">
-        <p><span class="inputs" id="pctleads">30</span>%</p>
+        <p class="mytext"><span class="outputs" id="qleads">250</span> qualified leads</p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>10. This is how many leads we will need:</p>
+        <p class="mytext">9. Choose a percentage of all leads that become qualified:</p>
       </div>
       <div class="column" id="box3">
-        <p><span class="outputs" id="tleads"></span> total leads.</p>
+        <p class="mytext"><span class="inputs" id="pctleads">30</span>%</p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>11. Choose a percentage of ad clicks that become leads. In life sciences this is typically between 1 and 3%
+        <p class="mytext">10. This is how many leads we will need:</p>
+      </div>
+      <div class="column" id="box3">
+        <p class="mytext"><span class="outputs" id="tleads"></span> total leads.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column" id="box2">
+        <p class="mytext">11. Choose a percentage of ad clicks that become leads. In life sciences this is typically between 1 and 3%
         </p>
       </div>
       <div class="column" id="box3">
-        <p><span class="inputs" id="clickstoleads">2</span>% </p>
+        <p class="mytext"><span class="inputs" id="clickstoleads">2</span>% </p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>12. This is how many ad clicks we'll need to generate <span class="outputs" id="tleads2"></span> leads</p>
+        <p class="mytext">12. This is how many ad clicks we'll need to generate <span class="outputs" id="tleads2"></span> leads</p>
       </div>
       <div class="column" id="box3">
-        <p><span class="outputs" id="ctleads"></span> clicks.</p>
+        <p class="mytext"><span class="outputs" id="ctleads"></span> clicks.</p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>13. Choose a percentage of viewed ads that are clicked (click through rate):</p>
+        <p class="mytext">13. Choose a percentage of viewed ads that are clicked (click through rate):</p>
       </div>
       <div class="column" id="box3">
-        <p><span class="inputs" id="clickthru">1.5</span>% is pretty typical</p>
+        <p class="mytext"><span class="inputs" id="clickthru">1.5</span>% is pretty typical</p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>14. This is how many ad views we'll need:</p>
+        <p class="mytext">14. This is how many ad views we'll need:</p>
       </div>
       <div class="column" id="box3">
-        <p><span class="outputs" id="views"></span> views</p>
+        <p class="mytext"><span class="outputs" id="views"></span> views</p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>15. Choose a cost per click.</p>
+        <p class="mytext">15. Choose a cost per click.</p>
       </div>
       <div class="column" id="box3">
-        <p>$<span class="inputs" id="costpclick">4</span></p>
+        <p class="mytext">$<span class="inputs" id="costpclick">4</span></p>
       </div>
     </div>
 
     <div class="row">
       <div class="column" id="box2">
-        <p>16. This is the ad investment needed to generate <span class="outputs" id="mpctofrev2">50</span> of revenue, thus positioning our marketing efforts as a profit center.</p>
+        <p class="mytext">16. This is the ad investment needed to generate $<span class="outputs" id="mpctofrev2">50</span> of revenue, thus positioning our marketing efforts as a profit center.</p>
       </div>
       <div class="column" id="box3">
-        <p>$<span class="outputs" id="adspend"></span></p>
+        <p class="mytext">$<span class="outputs" id="adspend"></span></p>
       </div>
     </div>
     <br /><br />
