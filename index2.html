@@ -38,7 +38,7 @@
         #box1 {
             margin-left: 150px;
             padding-top: 15px;
-            width: 90%;
+            width: 65%;
             margin: 0 auto;
             background-color: #003555;
         }
@@ -126,7 +126,7 @@
                 <label class="clabel">Calculate</label>
             </div>
         </div>
-        
+
         <div class="row" style="margin-top: 20px;">
             <div class="column box2">
                 <p class="mytext">1. Choose a total sales goal for the year.</p>
@@ -233,21 +233,7 @@
 
         <div class="row">
             <div class="column box2">
-                <p class="mytext">11. Choose a percentage of ad clicks that become leads. In life sciences this is
-                    typically between 1 and 3%
-                </p>
-            </div>
-            <div class="column box3">
-                <p class="mytext"><span class="inputs" id="clickstoleads">2</span>% <button class="plus"
-                        onclick="increment('clickstoleads')">+</button>
-                    <button class="minus" onclick="decrement('clickstoleads')">-</button>
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="column box2">
-                <p class="mytext">12. This is how many ad clicks we'll need to generate <span class="outputs"
+                <p class="mytext">11. In the life sciences, about 2% of ads clicked become leads, thus we'll need this many ad clicks to generate <span class="outputs"
                         id="tleads2"></span> leads</p>
             </div>
             <div class="column box3">
@@ -257,19 +243,7 @@
 
         <div class="row">
             <div class="column box2">
-                <p class="mytext">13. Choose a percentage of viewed ads that are clicked (click through rate):</p>
-            </div>
-            <div class="column box3">
-                <p class="mytext"><span class="inputs" id="clickthru">1.5</span>% <button class="plus"
-                        onclick="increment('clickthru')">+</button>
-                    <button class="minus" onclick="decrement('clickthru')">-</button>
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="column box2">
-                <p class="mytext">14. This is how many ad views we'll need:</p>
+                <p class="mytext">12. Typically, 1.5% of viewed ads are clicked, thus we'll need this many ad views:</p>
             </div>
             <div class="column box3">
                 <p class="mytext"><span class="outputs" id="views"></span> views</p>
@@ -278,7 +252,7 @@
 
         <div class="row">
             <div class="column box2">
-                <p class="mytext">15. Choose a cost per click.</p>
+                <p class="mytext">13. Choose a cost per click.</p>
             </div>
             <div class="column box3">
                 <p class="mytext">$<span class="inputs" id="costpclick">4</span> <button class="plus"
@@ -290,7 +264,7 @@
 
         <div class="row">
             <div class="column box2">
-                <p class="mytext">16. This is the ad investment needed to generate $<span class="outputs"
+                <p class="mytext">14. This is the ad investment needed to generate $<span class="outputs"
                         id="mpctofrev2">50</span> of revenue, thus positioning our marketing efforts as a profit center.
                 </p>
             </div>
@@ -302,6 +276,11 @@
         <br /><br />
 
     </section>
+    <br>
+    <h5 style="white-space: pre-wrap; text-align: center; font-size: 12px"><strong>Designed and programmed by Bracken's<br>
+            Director of Digital Marketing, Kathryn Minzola<br>
+            and Senior Partner, Paul Martinetti </strong></h5>
+    <br>
 
     <script>
 
@@ -366,8 +345,8 @@
             document.getElementById("pctcontracts").textContent = getVal("pctcontracts");
             document.getElementById("qleadpct").textContent = getVal("qleadpct");
             document.getElementById("pctleads").textContent = getVal("pctleads");
-            document.getElementById("clickstoleads").textContent = getVal("clickstoleads");
-            document.getElementById("clickthru").textContent = getVal("clickthru");
+            //document.getElementById("clickstoleads").textContent = getVal("clickstoleads");
+            //document.getElementById("clickthru").textContent = getVal("clickthru");
             document.getElementById("costpclick").textContent = getVal("costpclick");
 
             // contracts needed
